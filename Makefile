@@ -6,7 +6,7 @@
 #    By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/30 20:02:48 by ilkaddou          #+#    #+#              #
-#    Updated: 2024/12/30 22:42:02 by ilkaddou         ###   ########.fr        #
+#    Updated: 2024/12/31 02:55:23 by ilkaddou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,13 @@ SRC_FILES = $(SRC_DIR)/check_map.c $(SRC_DIR)/init_map.c $(SRC_DIR)/main.c
 UTILS_FILES = $(UTILS_DIR)/utils1.c
 GNL_FILES = $(GNL_DIR)/get_next_line.c
 
-# Fichiers objets
+# Dossier des objets
 OBJ_DIR = obj
-OBJ_FILES = $(SRC_FILES:.c=.o) $(UTILS_FILES:.c=.o) $(GNL_FILES:.c=.o)
+
+# Fichiers objets (avec le chemin vers le dossier obj)
+OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o) \
+            $(UTILS_FILES:$(UTILS_DIR)/%.c=$(OBJ_DIR)/%.o) \
+            $(GNL_FILES:$(GNL_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Nom de l'exécutable
 NAME = solong
@@ -42,9 +46,18 @@ $(NAME): $(OBJ_FILES)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(LDFLAGS)
 
 # Compilation des fichiers objets à partir des fichiers sources
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(UTILS_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(GNL_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Créer le répertoire des objets si nécessaire
+$(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $(OBJ_DIR)/$@
 
 # Règle pour nettoyer les fichiers objets
 clean:
