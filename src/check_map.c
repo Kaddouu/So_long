@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:56:20 by ilkaddou          #+#    #+#             */
-/*   Updated: 2024/12/31 02:40:29 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:14:00 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,32 @@
 int process_map_line(t_map *map, char *line, int i)
 { 
     int j;
+    size_t line_len;
+
+    line_len = ft_strlen(line);
+    if (line[line_len - 1] == '\n')
+        line_len--;  // Don't count the newline for length comparison
 
     if (i == 0)
-        map->width = ft_strlen(line) - 1;
-    if ((int)ft_strlen(line) - 1 != map->width)
-	{	
-		printf("map->map[%d] = NULL\n\n", i);
-		ft_putendl_fd("Not a rectangle\n", 2);
+        map->width = line_len;
+    if (line_len != (size_t)map->width)
+    {   
+        ft_putendl_fd("Not a rectangle\n", 2);
         return (0);
-	}
+    }
     j = 0;
     while (line[j] && line[j] != '\n')
     {
         if (line[j] != '0' && line[j] != '1' && line[j] != 'C'
             && line[j] != 'E' && line[j] != 'P')
-			{
-				ft_putendl_fd("Only C, E, P, 0 and 1 are accepted.", 2);
-            	return (0);
-			}
+        {
+            ft_putendl_fd("Only C, E, P, 0 and 1 are accepted.", 2);
+            return (0);
+        }
         j++;
     }
-    map->map[i] = ft_strdup(line);
-	printf("map->map[%d] reussi: %s\n\n", i, map->map[i]);
+    if (!(map->map[i] = ft_strdup(line)))
+        return (0);
     return (1);
 }
 

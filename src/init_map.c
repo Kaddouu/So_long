@@ -6,9 +6,11 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:14:14 by ilkaddou          #+#    #+#             */
-/*   Updated: 2024/12/31 02:40:05 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:23:25 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../includes/solong.h"
 #include "../GNL_github/get_next_line.h"
@@ -30,9 +32,9 @@ t_map *load_map(char *filename)
         free(map);
         return (NULL);
     }
-    while ((line = get_next_line(fd))) // Stocker la ligne dans une variable
+    while ((line = get_next_line(fd)))
     {
-        free(line); // Libérer la mémoire de chaque ligne
+        free(line);
         map->height++;
     }
     close(fd);
@@ -50,6 +52,7 @@ t_map *load_map_content(t_map *map, char *filename)
     int fd;
     char *line;
     int i;
+    char *tmp;
 
     i = 0;
     if ((fd = open(filename, O_RDONLY)) < 0)
@@ -58,7 +61,10 @@ t_map *load_map_content(t_map *map, char *filename)
     {
         if (!process_map_line(map, line, i))
         {
-			clean_and_exit(map, line, fd, i);
+            clean_and_exit(map, line, fd, i);
+            close(fd);
+            while ((tmp = get_next_line(fd)))
+                free(tmp);
             return (NULL);
         }
         free(line);
