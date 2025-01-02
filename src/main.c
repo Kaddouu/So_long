@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:07:09 by ilkaddou          #+#    #+#             */
-/*   Updated: 2024/12/31 00:59:54 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/02 23:20:25 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,21 @@ int main(int argc, char **argv)
     t_map *map;
     int i;
 
+    i = 0;
     if (argc != 2)
-    {
-        printf("Usage: %s <map.ber>\n", argv[0]);
         return (1);
-    }
-
     map = load_map(argv[1]);
     if (!map)
     {
         printf("Error: Failed to load map\n");
         return (1);
     }
-    printf("Map loaded successfully!\n\n");
-    printf("Dimensions: %dx%d\n", map->width, map->height);
-    printf("Collectibles: %d\n", map->collectibles);
-    printf("Players: %d\n", map->player);
-    printf("Exits: %d\n", map->exit);
-    printf("\nMap content:\n");
-    i = 0;
+	
     while (i < map->height)
     {
-        printf("%s", map->map[i]);
-        i++;
+        printf("%s", map->map[i++]);
     }
+	ft_putendl_fd("", 1);
     free_map(map);
     return (0);
 }

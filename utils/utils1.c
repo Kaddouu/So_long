@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:47:52 by ilkaddou          #+#    #+#             */
-/*   Updated: 2024/12/31 02:38:30 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/02 21:10:38 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,7 @@ void clean_and_exit(t_map *map, char *line, int fd, int i)
             while (i > 0)
             {
                 if (map->map[--i])
-            	{
-					printf("Ligne %d sera free\n", i);
-					printf("Ligne %s sera free\n\n", map->map[i]);
                     free(map->map[i]);
-				} 	
             }
             free(map->map);
         }
