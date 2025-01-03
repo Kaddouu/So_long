@@ -6,14 +6,13 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:14:14 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/02 22:09:34 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:14:44 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
 #include "../includes/solong.h"
-#include "../GNL_github/get_next_line.h"
 
 t_map *load_map(char *filename)
 {
@@ -49,10 +48,10 @@ t_map *load_map(char *filename)
 
 t_map *load_map_content(t_map *map, char *filename)
 {
-    int fd;
-    char *line;
-    int i;
-    char *tmp;
+    int		fd;
+    char	*line;
+    int 	i;
+    char 	*tmp;
 
     i = 0;
     if ((fd = open(filename, O_RDONLY)) < 0)
@@ -79,5 +78,7 @@ t_map *load_map_content(t_map *map, char *filename)
     }
     return (map);
 }
+
+
 
 

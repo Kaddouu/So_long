@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:56:20 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/02 23:12:44 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:37:05 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,13 @@ int check_map_validity(t_map *map)
         return (0);
 	}
     if (check_walls(map))
+	{
         return (0);
-    return (1);
+	}
+	if (!flood_fill_check(map))
+	{
+		return (0);
+	}
+	return (1);
 }
+

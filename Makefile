@@ -6,7 +6,7 @@
 #    By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/30 20:02:48 by ilkaddou          #+#    #+#              #
-#    Updated: 2024/12/31 02:55:23 by ilkaddou         ###   ########.fr        #
+#    Updated: 2025/01/03 18:14:25 by ilkaddou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,12 @@ LDFLAGS = -Llibft -lft
 # Dossiers de sources
 SRC_DIR = src
 UTILS_DIR = utils
-GNL_DIR = GNL_github
+GNL_DIR = GNL
 LIBFT_DIR = libft
 
 # Fichiers sources
 SRC_FILES = $(SRC_DIR)/check_map.c $(SRC_DIR)/init_map.c $(SRC_DIR)/main.c
-UTILS_FILES = $(UTILS_DIR)/utils1.c
+UTILS_FILES = $(UTILS_DIR)/utils1.c $(UTILS_DIR)/floodfill.c 
 GNL_FILES = $(GNL_DIR)/get_next_line.c
 
 # Dossier des objets
