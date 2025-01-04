@@ -1,5 +1,11 @@
 {
 	"files.associations": {
-		"solong.h": "c"
+		"solong.h": "c",
+		"libft.h": "c",
+		"get_next_line.h": "c",
+		"mlx.h": "c",
+		"fcntl.h": "c",
+		"stdlib.h": "c",
+		"stdio.h": "c"
 	}
 }

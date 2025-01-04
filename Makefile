@@ -6,7 +6,7 @@
 #    By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/30 20:02:48 by ilkaddou          #+#    #+#              #
-#    Updated: 2025/01/03 18:14:25 by ilkaddou         ###   ########.fr        #
+#    Updated: 2025/01/04 20:21:50 by ilkaddou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,14 @@ SRC_DIR = src
 UTILS_DIR = utils
 GNL_DIR = GNL
 LIBFT_DIR = libft
+MLX_DIR = minilibx-linux
+MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
+MLX_FLAGS = -L $(MLX_DIR) -lX11 -lXext -g3
+
+URL := https://cdn.intra.42.fr/document/document/28246/minilibx-linux.tgz
 
 # Fichiers sources
-SRC_FILES = $(SRC_DIR)/check_map.c $(SRC_DIR)/init_map.c $(SRC_DIR)/main.c
+SRC_FILES = $(SRC_DIR)/check_map.c $(SRC_DIR)/init_map.c $(SRC_DIR)/main.c $(SRC_DIR)/render_game.c
 UTILS_FILES = $(UTILS_DIR)/utils1.c $(UTILS_DIR)/floodfill.c 
 GNL_FILES = $(GNL_DIR)/get_next_line.c
 
@@ -35,15 +40,21 @@ OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o) \
             $(GNL_FILES:$(GNL_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Nom de l'exécutable
-NAME = solong
+NAME = so_long
 
 # Règles de compilation
-all: $(NAME)
+all: $(MLX_LIB) $(NAME)
+
+$(MLX_LIB):
+	curl -O $(URL)
+	tar -xf $(MLX_DIR).tgz
+	make --directory=$(MLX_DIR)
+	rm -rf $(MLX_DIR).tgz
 
 # Compilation de l'exécutable final
 $(NAME): $(OBJ_FILES)
 	make -C $(LIBFT_DIR)   # Compiler la libft
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(MLX_LIB) $(MLX_FLAGS) $(LDFLAGS)
 
 # Compilation des fichiers objets à partir des fichiers sources
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
