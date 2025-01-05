@@ -6,7 +6,7 @@
 #    By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/30 20:02:48 by ilkaddou          #+#    #+#              #
-#    Updated: 2025/01/04 20:21:50 by ilkaddou         ###   ########.fr        #
+#    Updated: 2025/01/05 19:52:40 by ilkaddou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ URL := https://cdn.intra.42.fr/document/document/28246/minilibx-linux.tgz
 
 # Fichiers sources
 SRC_FILES = $(SRC_DIR)/check_map.c $(SRC_DIR)/init_map.c $(SRC_DIR)/main.c $(SRC_DIR)/render_game.c
-UTILS_FILES = $(UTILS_DIR)/utils1.c $(UTILS_DIR)/floodfill.c 
+UTILS_FILES = $(UTILS_DIR)/utils1.c $(UTILS_DIR)/floodfill.c $(UTILS_DIR)/handle_texture.c $(UTILS_DIR)/handle_move.c
 GNL_FILES = $(GNL_DIR)/get_next_line.c
 
 # Dossier des objets

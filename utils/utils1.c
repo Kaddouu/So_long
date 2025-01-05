@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:47:52 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/04 20:45:10 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/05 19:53:11 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,27 @@ void	free_mlx(t_map *data)
 	free(data->mlx_connection);
 }
 
-int	key_press(int key, t_map *data)
-{
-    if (key == 65307)
-    {
-		printf("The %d key (ESC) has been pressed\n\n", key);
-		free_mlx(data);
-		free_map(data);
-		exit(1);
-    }
-    if (key == 65362 || key == 119)
-        printf("Flèche haut pressée\n");
-    if (key == 65364 || key == 115)
-        printf("Flèche bas pressée\n");
-    if (key == 65361 || key == 97)
-        printf("Flèche gauche pressée\n");
-    if (key == 65363 || key == 100)
-	{
-        printf("Flèche droite pressée\n");
-	}
-	return (0);
-}
+// int	key_press(int key, t_map *data)
+// {
+//     if (key == 65307)
+//     {
+// 		printf("The %d key (ESC) has been pressed\n\n", key);
+// 		free_mlx(data);
+// 		free_map(data);
+// 		exit(1);
+//     }
+//     if (key == 65362 || key == 119)
+//         ;
+//     if (key == 65364 || key == 115)
+//         printf("Flèche bas pressée\n");
+//     if (key == 65361 || key == 97)
+//         printf("Flèche gauche pressée\n");
+//     if (key == 65363 || key == 100)
+// 	{
+//         printf("Flèche droite pressée\n");
+// 	}
+// 	return (0);
+// }
 
 int	close_window(t_map *data)
 {
