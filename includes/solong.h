@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:33:16 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/05 20:25:13 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/05 23:37:23 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 typedef struct s_textures {
     void    *player;
+	void	*player_on_exit;
     void    *wall;
     void    *collectible;
     void    *exit;
@@ -41,7 +42,8 @@ typedef struct s_map
     int     player;
     int     exit;
     int     moves;
-    char    last_tile;
+	int     exit_x;
+    int     exit_y;
     void    *mlx_connection;
     void    *mlx_window;
     t_textures  textures;
@@ -66,5 +68,29 @@ void    load_textures(t_map *game);
 void    free_textures(t_map *game);
 void    draw_tile(t_map *game, void *texture, int x, int y);
 void    render_map(t_map *game);
+void    free_textures(t_map *game);
+void	load_player_texture(t_map *game);
+
+void    load_player_on_exit_texture(t_map *game);
+void    load_wall_texture(t_map *game);
+
+void    load_collectible_texture(t_map *game);
+
+void    load_exit_texture(t_map *game);
+
+void    load_floor_texture(t_map *game);
+
+void	move_up(t_map *game);
+void	move_down(t_map *game);
+void	move_left(t_map *game);
+void	move_right(t_map *game);
+
+void 	handle_move(t_map *game, int new_x, int new_y);
+void	find_player_pos(t_map *game, int *x, int *y);
+
+int 	can_move(t_map *game, int new_x, int new_y);
+
+
+
 
 #endif

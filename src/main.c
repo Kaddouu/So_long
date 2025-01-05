@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:07:09 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/04 20:34:23 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/05 23:04:35 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int main(int argc, char **argv)
         return (1);
     }
 	render_game(game);
+	free_textures(game);
+    free_mlx(game);
     free_map(game);
 	free(game);
     return (0);

@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:14:14 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/05 20:30:43 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/05 23:36:55 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_map *load_map(char *filename)
     if (!map)
         return (NULL);
     map->height = 0;
-    map->last_tile = '0';  // Initialisation du nouveau champ
     if ((fd = open(filename, O_RDONLY)) < 0)
     {
         free(map);
@@ -79,7 +78,3 @@ t_map *load_map_content(t_map *map, char *filename)
     }
     return (map);
 }
-
-
-
-

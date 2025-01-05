@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:56:20 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/05 19:48:36 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/05 23:48:07 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int check_walls(t_map *pos)
         if (pos->map[0][i] != '1' || pos->map[pos->height - 1][i] != '1')
 		{
 			ft_putendl_fd("First and last row must be filled with '1' only", 2);
-            return (1);
+            return (0);
 		}
         i++;
     }
@@ -61,11 +61,11 @@ int check_walls(t_map *pos)
         if (pos->map[i][0] != '1' || pos->map[i][pos->width - 1] != '1')
 		{
 			ft_putendl_fd("First and last column must be filled with '1' only", 2);
-            return (1);
+            return (0);
 		}
         i++;
     }
-    return (0);
+    return (1);
 }
 
 void count_elem(t_map *map)
@@ -85,7 +85,11 @@ void count_elem(t_map *map)
             if (map->map[i][j] == 'P')
                 map->player++;
             if (map->map[i][j] == 'E')
+            {
                 map->exit++;
+                map->exit_x = j;
+                map->exit_y = i;
+            }
             j++;
         }
         i++;
@@ -99,7 +103,7 @@ int check_map_validity(t_map *map)
 		ft_putendl_fd("Must contain at least one 'C', exactly one 'E' and one 'P'", 2);
         return (0);
 	}
-    if (check_walls(map))
+    if (!check_walls(map))
 	{
         return (0);
 	}
