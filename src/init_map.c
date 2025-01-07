@@ -6,17 +6,39 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:14:14 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/05 23:36:55 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:58:28 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "../includes/solong.h"
+
+static void	init_map_values(t_map *map)
+{
+    // Initialisation des champs basiques
+    map->height = 0;
+    map->width = 0;
+    map->collectibles = 0;
+    map->collected = 0;
+    map->moves = 0;
+    map->exit_x = 0;
+    map->exit_y = 0;
+    
+    // Initialisation des pointeurs MLX
+    map->mlx_connection = NULL;
+    map->mlx_window = NULL;
+    
+    // Initialisation des pointeurs de texture
+    map->textures.player = NULL;
+    map->textures.wall = NULL;
+    map->textures.collectible = NULL;
+    map->textures.exit = NULL;
+    map->textures.floor = NULL;
+    map->textures.player_on_exit = NULL;
+}
 
 t_map *load_map(char *filename)
 {
-    t_map *map;
+    t_map *map = NULL;
     int fd;
     char *line;
 
@@ -25,7 +47,7 @@ t_map *load_map(char *filename)
     map = malloc(sizeof(t_map));
     if (!map)
         return (NULL);
-    map->height = 0;
+    init_map_values(map);
     if ((fd = open(filename, O_RDONLY)) < 0)
     {
         free(map);

@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:33:16 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/06 00:22:25 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/07 20:15:11 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_textures {
     void    *collectible;
     void    *exit;
     void    *floor;
+	void	*monster;
 }   t_textures;
 
 typedef struct s_map
@@ -47,11 +48,6 @@ typedef struct s_map
     void    	*mlx_connection;
     void    	*mlx_window;
     t_textures  textures;
-	int     	player_dir;        // Direction du joueur (0 = haut, 1 = bas, 2 = gauche, 3 = droite)
-    int     	player_anim_frame; // Frame actuelle de l'animation
-    int     	player_is_moving; // 1 si le joueur se déplace, 0 sinon
-    void    	*player_images[4][4]; // Animations du joueur pour chaque direction (4 frames pour chaque direction)
-    void    	*player_idle_images[4][4]; // Animations du joueur immobile pour chaque direction (4 frames pour chaque direction)
 }   t_map;
 
 void    load_exit_texture(t_map *game);
@@ -74,7 +70,7 @@ void    free_textures(t_map *game);
 void    draw_tile(t_map *game, void *texture, int x, int y);
 void    render_map(t_map *game);
 void    free_textures(t_map *game);
-void	load_player_texture(t_map *game);
+void	load_player_direction_texture(t_map *game, char *path);
 
 void    load_player_on_exit_texture(t_map *game);
 void    load_wall_texture(t_map *game);

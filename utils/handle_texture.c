@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 17:45:34 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/06 00:30:46 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/07 17:34:33 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    load_textures(t_map *game)
 {
-    load_player_texture(game);
+	load_player_direction_texture(game, "./textures/character/down.xpm");
     load_wall_texture(game);
     load_collectible_texture(game);
     load_exit_texture(game);
@@ -33,11 +33,11 @@ void    render_map(t_map *game)
     int x;
     int y;
 
-    y = 0;
-    while (y < game->height)
+    y = -1;
+    while (++y < game->height)
     {
-        x = 0;
-        while (x < game->width)
+        x = -1;
+        while (++x < game->width)
         {
             draw_tile(game, game->textures.floor, x, y);
             if (game->map[y][x] == '1')
@@ -53,8 +53,6 @@ void    render_map(t_map *game)
                 draw_tile(game, game->textures.collectible, x, y);
             else if (game->map[y][x] == 'E')
                 draw_tile(game, game->textures.exit, x, y);
-            x++;
         }
-        y++;
-    }
+	}
 }

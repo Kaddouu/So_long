@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:47:52 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/05 23:45:55 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:48:19 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	free_mlx(t_map *data)
 
 int	close_window(t_map *data)
 {
+	free_textures(data);
 	free_mlx(data);
 	free_map(data);
 	exit(0);

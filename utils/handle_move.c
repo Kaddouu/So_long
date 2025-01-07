@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 17:44:52 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/05 23:19:26 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:40:52 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,11 @@ void handle_move(t_map *game, int new_x, int new_y)
     find_player_pos(game, &current_x, &current_y);
     if (!can_move(game, new_x, new_y))
         return;
-
     game->moves++;
     printf("Moves: %d\n", game->moves);
-    
-    // Vérifier si on est actuellement sur la sortie
    if((game->map[current_y][current_x] == 'P' && 
         (current_x == game->exit_x && current_y == game->exit_y)))
      on_exit = 1;
-    // Gérer la collecte d'items
     if (game->map[new_y][new_x] == 'C')
     {
         game->collected++;
@@ -77,22 +73,15 @@ void handle_move(t_map *game, int new_x, int new_y)
         if (game->collected == game->collectibles)
             load_exit_texture(game);
     }
-
-    // Restaurer la case actuelle
     if (on_exit)
         game->map[current_y][current_x] = 'E';
     else
         game->map[current_y][current_x] = '0';
-
-    // Sauvegarder si la nouvelle position est la sortie
     if (game->map[new_y][new_x] == 'E')
     {
         game->exit_x = new_x;
         game->exit_y = new_y;
     }
-    
-    // Déplacer le joueur
     game->map[new_y][new_x] = 'P';
-    
     render_map(game);
 }
