@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
+/*   By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 17:45:34 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/07 17:34:33 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/08 21:07:37 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void    load_textures(t_map *game)
 {
+    load_floor_texture(game);
 	load_player_direction_texture(game, "./textures/character/down.xpm");
     load_wall_texture(game);
     load_collectible_texture(game);
     load_exit_texture(game);
     load_player_on_exit_texture(game);
-    load_floor_texture(game);
 }
 
 void    draw_tile(t_map *game, void *texture, int x, int y)

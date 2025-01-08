@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   solong.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
+/*   By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:33:16 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/07 20:15:11 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/08 16:31:41 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SOLONG_H
 # define SOLONG_H
 
-# include <../minilibx-linux/mlx.h>
+# include <../minilibx_macos/mlx.h>
 # include "../GNL/get_next_line.h"
 # include <stdlib.h>
 # include <unistd.h>

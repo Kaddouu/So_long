@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
+/*   By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:47:52 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/07 16:48:19 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:47:29 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void free_map(t_map *map)
 void	free_mlx(t_map *data)
 {
 	if (data->mlx_window)
-		mlx_destroy_window(data->mlx_connection, data->mlx_window);
+		// mlx_destroy_window(data->mlx_connection, data->mlx_window);
 	if (data->mlx_connection)
-		mlx_destroy_display(data->mlx_connection);
+		// mlx_destroy_display(data->mlx_connection);
 	free(data->mlx_connection);
 }
 

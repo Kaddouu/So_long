@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
+/*   By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:19:42 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/07 17:32:37 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/08 17:34:07 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	render_game(t_map *game)
     game->mlx_window = mlx_new_window(game->mlx_connection,
         game->width * TILE_SIZE,
         game->height * TILE_SIZE,
-        "So Long");
+        "Fuck Jean-Marie Stylo");
     if (!game->mlx_window)
     {
-        mlx_destroy_display(game->mlx_connection);
+        // mlx_destroy_display(game->mlx_connection);
         free(game->mlx_connection);
         return (1);
     }

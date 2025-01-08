@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+         #
+#    By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/30 20:02:48 by ilkaddou          #+#    #+#              #
-#    Updated: 2025/01/07 20:48:23 by ilkaddou         ###   ########.fr        #
+#    Updated: 2025/01/08 15:45:15 by ilkaddou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,16 +15,28 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iincludes -Ilibft -g3
 LDFLAGS = -Llibft -lft
 
+# OS-specific settings
+UNAME := $(shell uname)
+ifeq ($(UNAME), Darwin)  # macOS
+	MLX_DIR = minilibx_macos
+	MLX_LIB = $(MLX_DIR)/libmlx.a
+	MLX_FLAGS = -framework OpenGL -framework AppKit
+else  # Linux
+	MLX_DIR = minilibx_linux
+	MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
+	MLX_FLAGS = -Lmlx -lmlx -lm -lbsd -lX11 -lXext
+endif
+
 # Dossiers de sources
 SRC_DIR = src
 UTILS_DIR = utils
 GNL_DIR = GNL
 LIBFT_DIR = libft
-MLX_DIR = minilibx-linux
-MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
-MLX_FLAGS = -L $(MLX_DIR) -lX11 -lXext -g3
+#MLX_DIR = minilibx-linux
+#MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
+#MLX_FLAGS = -L $(MLX_DIR) -lX11 -lXext -g3
 
-URL := https://cdn.intra.42.fr/document/document/28246/minilibx-linux.tgz
+#URL := https://cdn.intra.42.fr/document/document/28246/minilibx-linux.tgz
 
 # Fichiers sources
 SRC_FILES = $(SRC_DIR)/check_map.c $(SRC_DIR)/init_map.c $(SRC_DIR)/main.c $(SRC_DIR)/render_game.c
@@ -44,12 +56,6 @@ NAME = so_long
 
 # Règles de compilation
 all: $(MLX_LIB) $(NAME)
-
-$(MLX_LIB):
-	curl -O $(URL)
-	tar -xf $(MLX_DIR).tgz
-	make --directory=$(MLX_DIR)
-	rm -rf $(MLX_DIR).tgz
 
 # Compilation de l'exécutable final
 $(NAME): $(OBJ_FILES)
