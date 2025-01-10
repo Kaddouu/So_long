@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_directions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
+/*   By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 23:16:48 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/09 19:40:19 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/10 01:00:18 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,22 @@ int	key_press(int key, t_map *game)
 		close_window(game);
 	else if (key == KEY_UP || key == KEY_W)
 	{
-		game->player_anims.current_direction = 1;
+		game->player_anims.current_direction = DIR_UP;
 		move_up(game);
 	}
 	else if (key == KEY_LEFT || key == KEY_A)
 	{
-		game->player_anims.current_direction = 2;
+		game->player_anims.current_direction = DIR_LEFT;
 		move_left(game);
 	}
 	else if (key == KEY_RIGHT || key == KEY_D)
 	{
-		game->player_anims.current_direction = 3;
+		game->player_anims.current_direction = DIR_RIGHT;
 		move_right(game);
 	}
 	else if (key == KEY_DOWN || key == KEY_S)
 	{
-		game->player_anims.current_direction = 0;
+		game->player_anims.current_direction = DIR_DOWN;
 		move_down(game);
 	}
 	return (0);
