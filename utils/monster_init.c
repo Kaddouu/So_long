@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:38:29 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/11 22:50:00 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/11 23:03:17 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ static int load_monster_frames(t_map *game, t_monster *monster)
         frame_path = ft_strjoin(tmp, ".xpm");
         free(tmp);
         if (!frame_path)
-            return (0);
-        
-        // Vérifier si le fichier existe avant de le charger
+            return (0);        
         int fd = open(frame_path, O_RDONLY);
         if (fd < 0)
         {
@@ -73,7 +71,6 @@ static int load_monster_frames(t_map *game, t_monster *monster)
             return (0);
         }
         close(fd);
-        
         monster->anim.frames[i] = mlx_xpm_file_to_image(
             game->mlx_connection, frame_path, &width, &height);
         free(frame_path);
@@ -101,8 +98,11 @@ static int init_single_monster(t_map *game, t_monster *monster, int x, int y)
 
 int init_monsters(t_map *game)
 {
-    int i = 0, j, monster_index = 0;
+    int i;
+	int	j;
+	int monster_index = 0;
 
+	i = -1;
     count_monsters(game);
     if (game->monsters.count == 0)
         return (1);
@@ -111,10 +111,10 @@ int init_monsters(t_map *game)
     if (!game->monsters.monsters)
         return (0);
 
-    while (i < game->height)
+    while (++i < game->height)
     {
-        j = 0;
-        while (j < game->width)
+        j = -1;
+        while (++j < game->width)
         {
             if (game->map[i][j] == 'M')
             {
@@ -125,9 +125,7 @@ int init_monsters(t_map *game)
                 }
                 monster_index++;
             }
-            j++;
         }
-        i++;
     }
     return (1);
 }
