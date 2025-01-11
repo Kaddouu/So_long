@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:14:14 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/08 16:31:56 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/11 22:41:32 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	init_map_values(t_map *map)
     map->textures.exit = NULL;
     map->textures.floor = NULL;
     map->textures.player_on_exit = NULL;
+	map->monsters.monsters = NULL;
+	map->monsters.count = 0;
 }
 
 t_map *load_map(char *filename)

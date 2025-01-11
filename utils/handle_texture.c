@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 17:45:34 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/10 01:36:59 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/11 22:43:31 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,33 +57,5 @@ void	render_map(t_map *game)
 				draw_tile(game, game->textures.exit, x, y);
 		}
 	}
+	render_monsters(game);
 }
-
-// void    render_map(t_map *game)
-// {
-//     int x;
-//     int y;
-
-//     y = -1;
-//     while (++y < game->height)
-//     {
-//         x = -1;
-//         while (++x < game->width)
-//         {
-//             draw_tile(game, game->textures.floor, x, y);
-//             if (game->map[y][x] == '1')
-//                 draw_tile(game, game->textures.wall, x, y);
-//             else if (game->map[y][x] == 'P')
-//             {
-//                 if (x == game->exit_x && y == game->exit_y)
-//                     draw_tile(game, game->textures.player_on_exit, x, y);
-//                 else
-//                     draw_tile(game, game->textures.player, x, y);
-//             }
-//             else if (game->map[y][x] == 'C')
-//                 draw_tile(game, game->textures.collectible, x, y);
-//             else if (game->map[y][x] == 'E')
-//                 draw_tile(game, game->textures.exit, x, y);
-//         }
-// 	}
-// }

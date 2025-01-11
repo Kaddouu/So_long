@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   solong.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:33:16 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/10 01:08:59 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/11 22:44:02 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SOLONG_H
 # define SOLONG_H
 
-# include "../minilibx_macos/mlx.h"
-// # include <../minilibx-linux/mlx.h>
+// # include "../minilibx_macos/mlx.h"
+# include <../minilibx-linux/mlx.h>
 # include "../GNL/get_next_line.h"
 # include "../libft/libft.h"
 # include <fcntl.h>
@@ -27,7 +27,10 @@
 # define DIR_LEFT 2
 # define DIR_RIGHT 3
 # define DIR_DOWN 4
-# define MAX_FRAMES 4
+# define MAX_FRAMES 6
+
+
+
 
 /* Structure pour une séquence d'animation */
 typedef struct s_frame
@@ -38,7 +41,20 @@ typedef struct s_frame
 	int				delay_counter;
 }					t_frame;
 
+typedef struct s_monster
+{
+	int		x;
+	int		y;
+	int		move_delay;
+	int		delay_counter;
+	t_frame	anim;
+}	t_monster;
 /* Structure pour toutes les animations du joueur */
+typedef struct s_monster_list
+{
+	t_monster	*monsters;
+	int			count;
+}	t_monster_list;
 typedef struct s_player_anims
 {
 	t_frame			idle_up;
@@ -75,6 +91,7 @@ typedef struct s_map
 	void			*mlx_window;
 	t_player_anims	player_anims;
 	t_textures		textures;
+	t_monster_list	monsters;
 }					t_map;
 
 void				load_exit_texture(t_map *game);
@@ -122,4 +139,9 @@ int                 clean_animations(t_map *game, int level);
 int                 init_animations(t_map *game);
 t_frame             *get_current_anim(t_map *game);
 void                update_animation(t_frame *frame);
+
+void	update_all_monsters(t_map *game);
+void	render_monsters(t_map *game);
+void 	free_monster_textures(t_map *game);
+int init_monsters(t_map *game);
 #endif

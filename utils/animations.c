@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 17:39:59 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/10 01:31:26 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/11 22:55:14 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	init_frame(t_frame *frame)
 
 	i = 0;
 	frame->current_frame = 0;
-	frame->frame_delay = 3;
+	frame->frame_delay = 312;
 	frame->delay_counter = 0;
 	while (i < MAX_FRAMES)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:47:52 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/10 01:12:29 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:46:04 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,28 @@ void	free_mlx(t_map *data)
 	}
 }
 
+void	free_monster_textures(t_map *game)
+{
+	int	i;
+	int	j;
+
+	if (!game || !game->monsters.monsters)
+		return ;
+	i = -1;
+	while (++i < game->monsters.count)
+	{
+		j = -1;
+		while (++j < MAX_FRAMES)
+		{
+			if (game->monsters.monsters[i].anim.frames[j])
+				mlx_destroy_image(game->mlx_connection,
+					game->monsters.monsters[i].anim.frames[j]);
+		}
+	}
+	free(game->monsters.monsters);
+	game->monsters.monsters = NULL;
+}
+
 int	close_window(t_map *data)
 {
 	free_textures(data);
@@ -107,6 +129,7 @@ void	free_textures(t_map *game)
 		mlx_destroy_image(game->mlx_connection, game->textures.floor);
 	if (game->textures.player_on_exit)
 		mlx_destroy_image(game->mlx_connection, game->textures.player_on_exit);
+	free_monster_textures(game);
 	free_animation_frames(&game->player_anims.idle_up, game);
 	free_animation_frames(&game->player_anims.idle_down, game);
 	free_animation_frames(&game->player_anims.idle_left, game);

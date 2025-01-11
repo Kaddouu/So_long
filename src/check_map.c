@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:56:20 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/08 16:32:19 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:40:58 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int	process_map_line(t_map *map, char *line, int i)
 	while (line[j] && line[j] != '\n')
 	{
 		if (line[j] != '0' && line[j] != '1' && line[j] != 'C'
-		&& line[j] != 'E' && line[j] != 'P')
-		{
-			ft_putendl_fd("Only C, E, P, 0 and 1 are accepted.", 2);
-			return (0);
-		}
+	&& line[j] != 'E' && line[j] != 'P' && line[j] != 'M')
+	{
+		ft_putendl_fd("Only M, C, E, P, 0 and 1 are accepted.", 2);
+		return (0);
+	}
 		j++;
 	}
 	if (!(map->map[i] = ft_strdup(line)))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 17:44:52 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/10 01:17:00 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:42:10 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ void	handle_move(t_map *game, int new_x, int new_y)
 	if ((game->map[current_y][current_x] == 'P' && (current_x == game->exit_x
 				&& current_y == game->exit_y)))
 		on_exit = 1;
+	if (game->map[new_y][new_x] == 'M')
+	{
+		ft_putendl_fd("Game Over! You ran into a monster!", 1);
+		close_window(game);
+	}
 	if (game->map[new_y][new_x] == 'C')
 	{
 		game->collected++;
