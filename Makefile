@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+         #
+#    By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/30 20:02:48 by ilkaddou          #+#    #+#              #
-#    Updated: 2025/01/08 15:45:15 by ilkaddou         ###   ########.fr        #
+#    Updated: 2025/01/09 15:53:36 by ilkaddou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ ifeq ($(UNAME), Darwin)  # macOS
 	MLX_LIB = $(MLX_DIR)/libmlx.a
 	MLX_FLAGS = -framework OpenGL -framework AppKit
 else  # Linux
-	MLX_DIR = minilibx_linux
+	MLX_DIR = minilibx-linux
 	MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
-	MLX_FLAGS = -Lmlx -lmlx -lm -lbsd -lX11 -lXext
+	MLX_FLAGS = -Lmlx -lm -lbsd -lX11 -lXext
 endif
 
 # Dossiers de sources

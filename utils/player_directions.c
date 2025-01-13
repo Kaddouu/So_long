@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 23:16:48 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/08 15:51:22 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/10 01:00:18 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,27 +86,27 @@ void	move_right(t_map *game)
 
 int	key_press(int key, t_map *game)
 {
-	if (key == KEY_ESC) // ESC
+	if (key == KEY_ESC)
 		close_window(game);
 	else if (key == KEY_UP || key == KEY_W)
 	{
-		load_player_direction_texture(game, "./textures/character/up.xpm");
+		game->player_anims.current_direction = DIR_UP;
 		move_up(game);
-	}
-	else if (key == KEY_DOWN || key == KEY_S)
-	{
-		load_player_direction_texture(game, "./textures/character/down.xpm");
-		move_down(game);
 	}
 	else if (key == KEY_LEFT || key == KEY_A)
 	{
-		load_player_direction_texture(game, "./textures/character/left.xpm");
+		game->player_anims.current_direction = DIR_LEFT;
 		move_left(game);
 	}
 	else if (key == KEY_RIGHT || key == KEY_D)
 	{
-		load_player_direction_texture(game, "./textures/character/right.xpm");
+		game->player_anims.current_direction = DIR_RIGHT;
 		move_right(game);
+	}
+	else if (key == KEY_DOWN || key == KEY_S)
+	{
+		game->player_anims.current_direction = DIR_DOWN;
+		move_down(game);
 	}
 	return (0);
 }

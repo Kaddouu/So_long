@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:26:43 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/05 23:49:39 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:41:35 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ static void find_player(t_map *map, int *player_x, int *player_y)
 
 static void fill(char **map_copy, int player_x, int player_y, t_map *map)
 {
-    if (player_x < 0 || player_x >= map->width || player_y < 0 || player_y >= map->height
-		|| map_copy[player_y][player_x] == '1' || map_copy[player_y][player_x] == 'F')
-        return;
+    if (player_x < 0 || player_x >= map->width || player_y < 0 
+	|| player_y >= map->height || map_copy[player_y][player_x] == '1' 
+	|| map_copy[player_y][player_x] == 'F' 
+	|| map_copy[player_y][player_x] == 'M')
+	return ;
     map_copy[player_y][player_x] = 'F';
     fill(map_copy, player_x + 1, player_y, map);
     fill(map_copy, player_x - 1, player_y, map);
