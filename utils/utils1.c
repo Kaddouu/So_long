@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:47:52 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/11 18:46:04 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:41:52 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ int	close_window(t_map *data)
 }
 
 /* Libère les frames d'une animation */
-static void	free_animation_frames(t_frame *frame, t_map *game)
+
+void	free_animation_frames(t_frame *frame, t_map *game)
 {
 	int	i;
 
@@ -111,27 +112,42 @@ static void	free_animation_frames(t_frame *frame, t_map *game)
 		i++;
 	}
 }
-
-/* Libère toutes les textures du jeu */
-void	free_textures(t_map *game)
+int	clean_animations(t_map *game, int level)
 {
 	if (!game)
-		return ;
-	if (game->textures.player)
-		mlx_destroy_image(game->mlx_connection, game->textures.player);
-	if (game->textures.wall)
-		mlx_destroy_image(game->mlx_connection, game->textures.wall);
-	if (game->textures.collectible)
-		mlx_destroy_image(game->mlx_connection, game->textures.collectible);
-	if (game->textures.exit)
-		mlx_destroy_image(game->mlx_connection, game->textures.exit);
-	if (game->textures.floor)
-		mlx_destroy_image(game->mlx_connection, game->textures.floor);
-	if (game->textures.player_on_exit)
-		mlx_destroy_image(game->mlx_connection, game->textures.player_on_exit);
-	free_monster_textures(game);
-	free_animation_frames(&game->player_anims.idle_up, game);
-	free_animation_frames(&game->player_anims.idle_down, game);
-	free_animation_frames(&game->player_anims.idle_left, game);
-	free_animation_frames(&game->player_anims.idle_right, game);
+		return (0);
+	if (level >= 4)
+		free_animation_frames(&game->player_anims.idle_right, game);
+	if (level >= 3)
+		free_animation_frames(&game->player_anims.idle_left, game);
+	if (level >= 2)
+		free_animation_frames(&game->player_anims.idle_up, game);
+	if (level >= 1)
+		free_animation_frames(&game->player_anims.idle_down, game);
+	return (0);
+}
+
+/* Libère toutes les textures du jeu */
+void    free_textures(t_map *game)
+{
+    if (!game)
+        return ;
+    if (game->textures.player)
+        mlx_destroy_image(game->mlx_connection, game->textures.player);
+    if (game->textures.wall)
+        mlx_destroy_image(game->mlx_connection, game->textures.wall);
+    if (game->textures.collectible)
+        mlx_destroy_image(game->mlx_connection, game->textures.collectible);
+    if (game->textures.exit)
+        mlx_destroy_image(game->mlx_connection, game->textures.exit);
+    if (game->textures.floor)
+        mlx_destroy_image(game->mlx_connection, game->textures.floor);
+    if (game->textures.player_on_exit)
+        mlx_destroy_image(game->mlx_connection, game->textures.player_on_exit);
+    free_monster_textures(game);
+    free_animation_frames(&game->player_anims.idle_up, game);
+    free_animation_frames(&game->player_anims.idle_down, game);
+    free_animation_frames(&game->player_anims.idle_left, game);
+    free_animation_frames(&game->player_anims.idle_right, game);
+    free_animation_frames(&game->player_anims.idle_down_exit, game);
 }

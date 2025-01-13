@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:33:16 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/11 22:44:02 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:40:32 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_player_anims
 	t_frame			idle_down;
 	t_frame			idle_left;
 	t_frame			idle_right;
+    t_frame         idle_down_exit;
 	int				current_direction;
 }					t_player_anims;
 
@@ -94,6 +95,7 @@ typedef struct s_map
 	t_monster_list	monsters;
 }					t_map;
 
+
 void				load_exit_texture(t_map *game);
 t_map				*load_map(char *filename);
 t_map				*load_map_content(t_map *map, char *filename);
@@ -115,12 +117,8 @@ void				draw_tile(t_map *game, void *texture, int x, int y);
 void				render_map(t_map *game);
 void				free_textures(t_map *game);
 void				load_player_direction_texture(t_map *game, char *path);
-
-void				load_player_on_exit_texture(t_map *game);
 void				load_wall_texture(t_map *game);
-
 void				load_collectible_texture(t_map *game);
-
 void				load_exit_texture(t_map *game);
 
 void				load_floor_texture(t_map *game);
@@ -135,7 +133,9 @@ void				find_player_pos(t_map *game, int *x, int *y);
 
 int					can_move(t_map *game, int new_x, int new_y);
 
-int                 clean_animations(t_map *game, int level);
+void	free_animation_frames(t_frame *frame, t_map *game);
+
+int	clean_animations(t_map *game, int level);
 int                 init_animations(t_map *game);
 t_frame             *get_current_anim(t_map *game);
 void                update_animation(t_frame *frame);

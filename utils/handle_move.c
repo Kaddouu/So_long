@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 17:44:52 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/11 18:42:10 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:18:29 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	find_player_pos(t_map *game, int *x, int *y)
 
 int	can_move(t_map *game, int new_x, int new_y)
 {
-	if (game->map[new_y][new_x] == '1' || (game->map[new_y][new_x] == 'E' 
-        && game->collected != game->collectibles))
+	if (game->map[new_y][new_x] == '1')
         return (0);
     if (game->map[new_y][new_x] == 'E' && game->collected == game->collectibles)
     {
