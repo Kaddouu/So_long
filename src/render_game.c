@@ -6,17 +6,17 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:19:42 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/13 15:29:04 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/14 01:18:23 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/solong.h"
 
-int update_game(t_map *game)
+int	update_game(t_map *game)
 {
-    update_all_monsters(game);
-    render_map(game);
-    return (0);
+	update_all_monsters(game);
+	render_map(game);
+	return (0);
 }
 
 int	render_game(t_map *game)

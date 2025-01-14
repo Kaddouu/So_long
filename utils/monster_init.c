@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:38:29 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/13 14:41:03 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/14 00:59:32 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void init_monster_values(t_monster *monster, int x, int y)
 {
     monster->x = x;
     monster->y = y;
-    monster->move_delay = 300;
+    monster->move_delay = 2000;
     monster->delay_counter = 0;
     monster->anim.current_frame = 0;
     monster->anim.frame_delay = 90;
