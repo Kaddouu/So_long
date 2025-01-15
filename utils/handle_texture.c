@@ -6,21 +6,11 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 17:45:34 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/13 17:41:32 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/14 22:50:49 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/solong.h"
-
-void	load_textures(t_map *game)
-{
-	if (!game)
-		return ;
-	load_floor_texture(game);
-	load_wall_texture(game);
-	load_collectible_texture(game);
-	load_exit_texture(game);
-}
 
 void	draw_tile(t_map *game, void *texture, int x, int y)
 {

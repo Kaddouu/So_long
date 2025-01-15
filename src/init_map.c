@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:14:14 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/14 01:24:35 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/14 23:09:06 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,27 @@ t_map	*load_map(char *filename)
 	init_map_values(map);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (free(map), NULL);
+	{
+		free(map);
+		return (NULL);
+	}
 	while ((line = get_next_line(fd)))
 	{
-		free(line);
 		map->height++;
+		free(line);
+	}
+	if (map->height == 0)
+	{
+		free(map);
+		close(fd);
+		return (NULL);
 	}
 	close(fd);
 	map->map = malloc(sizeof(char *) * (map->height + 1));
 	if (!(map->map))
 	{
-		return (free_map(map), NULL);
+		free(map);
+		return (NULL);
 	}
 	return (load_map_content(map, filename));
 }
@@ -73,13 +83,16 @@ t_map	*load_map_content(t_map *map, char *filename)
 	i = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
+	{
+		free(map->map);
+		free(map);
 		return (NULL);
+	}
 	while ((line = get_next_line(fd)))
 	{
 		if (!process_map_line(map, line, i))
 		{
 			clean_and_exit(map, line, fd, i);
-			close(fd);
 			while ((tmp = get_next_line(fd)))
 				free(tmp);
 			return (NULL);

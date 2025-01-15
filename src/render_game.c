@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:19:42 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/14 01:18:23 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/14 22:00:14 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,29 @@ int	render_game(t_map *game)
 	game->mlx_connection = mlx_init();
 	if (!game->mlx_connection)
 		return (1);
-	game->mlx_window = mlx_new_window(game->mlx_connection, game->width
-			* TILE_SIZE, game->height * TILE_SIZE, "so_long");
+	game->mlx_window = mlx_new_window(game->mlx_connection,
+			game->width * TILE_SIZE, game->height * TILE_SIZE, "so_long");
 	if (!game->mlx_window)
-		return (free(game->mlx_connection), 1);
-	if (!init_animations(game) || !init_monsters(game))
 	{
 		free_mlx(game);
 		return (1);
 	}
-	load_textures(game);
+	if (!init_animations(game))
+	{
+		free_mlx(game);
+		return (1);
+	}
+	if (!init_monsters(game))
+	{
+		free_textures(game);
+		free_mlx(game);
+		return (1);
+	}
+	if (!load_textures(game))
+	{
+		clean_all_resources(game);
+		return (1);
+	}
 	render_map(game);
 	mlx_hook(game->mlx_window, 17, 0, close_window, game);
 	mlx_hook(game->mlx_window, 2, 1L << 0, key_press, game);
