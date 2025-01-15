@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:14:14 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/14 23:09:06 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/15 20:04:58 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,40 +36,29 @@ static void	init_map_values(t_map *map)
 t_map	*load_map(char *filename)
 {
 	t_map	*map;
-	int		fd;
-	char	*line;
 
 	map = NULL;
 	if (!ft_strnstr(filename, ".ber", ft_strlen(filename)))
+	{
+		ft_putendl_fd("Error\nNot a .ber map", 2);
 		return (NULL);
+	}
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
 	init_map_values(map);
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	if (!count_map_height(map, filename))
 	{
-		free(map);
+		free_and_close(map, -1);
 		return (NULL);
-	}
-	while ((line = get_next_line(fd)))
-	{
-		map->height++;
-		free(line);
 	}
 	if (map->height == 0)
 	{
-		free(map);
-		close(fd);
-		return (NULL);
+		ft_putendl_fd("Error\nEmpty file", 2);
+		return (free(map), NULL);
 	}
-	close(fd);
-	map->map = malloc(sizeof(char *) * (map->height + 1));
-	if (!(map->map))
-	{
-		free(map);
+	if (!allocate_map_array(map))
 		return (NULL);
-	}
 	return (load_map_content(map, filename));
 }
 
@@ -78,29 +67,24 @@ t_map	*load_map_content(t_map *map, char *filename)
 	int		fd;
 	char	*line;
 	int		i;
-	char	*tmp;
 
 	i = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-	{
-		free(map->map);
-		free(map);
-		return (NULL);
-	}
+		return (free(map->map), free(map), NULL);
 	while ((line = get_next_line(fd)))
 	{
-		if (!process_map_line(map, line, i))
-		{
-			clean_and_exit(map, line, fd, i);
-			while ((tmp = get_next_line(fd)))
-				free(tmp);
+		if (not_process_line(map, line, i, fd))
 			return (NULL);
-		}
-		free(line);
 		i++;
 	}
 	close(fd);
+	if (i < map->height)
+	{
+		ft_putendl_fd("Error\nInvalid map format", 2);
+		clean_and_exit(map, NULL, -1, i);
+		return (NULL);
+	}
 	map->map[i] = NULL;
 	if (!check_map_validity(map))
 	{

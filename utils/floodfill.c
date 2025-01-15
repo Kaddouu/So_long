@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:26:43 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/13 16:05:46 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:42:36 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int flood_fill_check(t_map *map)
     fill(map_copy, player_x, player_y, map);
     if (!check_accessibility(map_copy, map))
 	{
-        ft_putendl_fd("Error: Some collectibles or exit are not accessible", 2);
+        ft_putendl_fd("Error\nSome collectibles or exit are not accessible\n", 2);
 		 while (i < map->height)
         free(map_copy[i++]);
     	free(map_copy);

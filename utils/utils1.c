@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:47:52 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/15 17:08:30 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:41:38 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,7 @@ void	free_mlx(t_map *data)
 	}
 	if (data->mlx_connection)
 	{
-#ifdef __linux__
 		mlx_destroy_display(data->mlx_connection);
-#endif
 		free(data->mlx_connection);
 		data->mlx_connection = NULL;
 	}
@@ -112,8 +110,6 @@ int	close_window(t_map *game)
 	clean_all_resources(game);
 	exit(0);
 }
-
-/* Libère les frames d'une animation */
 
 void	free_animation_frames(t_frame *frame, t_map *game)
 {

@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:33:16 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/14 23:24:43 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:36:53 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,13 @@ void				update_animation(t_frame *frame);
 
 void				update_all_monsters(t_map *game);
 void				render_monsters(t_map *game);
-void	free_monster_textures(t_map *game);
+void				free_monster_textures(t_map *game);
 int					init_monsters(t_map *game);
+
+void	free_and_close(t_map *map, int fd);
+int	count_map_height(t_map *map, char *filename);
+int	allocate_map_array(t_map *map);
+void	clean_remaining_lines(int fd);
+int	not_process_line(t_map *map, char *line, int i, int fd);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:07:09 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/14 21:24:31 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:38:00 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	game = load_map(argv[1]);
 	if (!game)
 	{
-		printf("Error: Failed to load game\n");
+		ft_putendl_fd("Failed to load game\n", 2);
 		return (1);
 	}
 	render_game(game);
