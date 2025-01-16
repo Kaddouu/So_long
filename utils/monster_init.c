@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:38:29 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/14 23:21:37 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:23:07 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int	init_monsters(t_map *game)
 	count_monsters(game);
 	if (game->monsters.count == 0)
 		return (1);
-	game->monsters.monsters = ft_calloc(game->monsters.count, sizeof(t_monster));
+	game->monsters.monsters = ft_calloc(game->monsters.count,
+			sizeof(t_monster));
 	if (!game->monsters.monsters)
 		return (0);
 	while (++i < game->height)

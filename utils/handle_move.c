@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 17:44:52 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/13 16:18:29 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:22:39 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	find_player_pos(t_map *game, int *x, int *y)
 int	can_move(t_map *game, int new_x, int new_y)
 {
 	if (game->map[new_y][new_x] == '1')
-        return (0);
-    if (game->map[new_y][new_x] == 'E' && game->collected == game->collectibles)
-    {
+		return (0);
+	if (game->map[new_y][new_x] == 'E' && game->collected == game->collectibles)
+	{
 		printf("Congratulations! You won in %d moves!\n", game->moves);
 		close_window(game);
-    }
-    return (1);
+	}
+	return (1);
 }
 
 void	handle_move(t_map *game, int new_x, int new_y)
@@ -53,7 +53,7 @@ void	handle_move(t_map *game, int new_x, int new_y)
 	game->moves++;
 	printf("Moves: %d\n", game->moves);
 	if ((game->map[current_y][current_x] == 'P' && (current_x == game->exit_x
-				&& current_y == game->exit_y)))
+			&& current_y == game->exit_y)))
 		on_exit = 1;
 	if (game->map[new_y][new_x] == 'M')
 	{

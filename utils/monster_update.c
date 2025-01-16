@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:39:44 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/11 22:51:28 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:24:22 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,15 @@ static void	update_monster(t_map *game, t_monster *monster)
 	i = -1;
 	while (++i < 4)
 	{
-		if (is_valid_monster_move(game,
-				monster->x + moves[i][0], monster->y + moves[i][1]))
+		if (is_valid_monster_move(game, monster->x + moves[i][0], monster->y
+			+ moves[i][1]))
 			valid_moves[valid_count++] = i;
 	}
 	if (valid_count == 0)
 		return ;
 	chosen_move = valid_moves[rand() % valid_count];
-	move_monster(game, monster,
-		monster->x + moves[chosen_move][0],
-		monster->y + moves[chosen_move][1]);
+	move_monster(game, monster, monster->x + moves[chosen_move][0], monster->y
+		+ moves[chosen_move][1]);
 }
 
 void	update_all_monsters(t_map *game)

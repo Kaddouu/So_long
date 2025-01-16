@@ -6,27 +6,16 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:56:20 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/15 20:04:06 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:02:26 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/solong.h"
 
-int	process_map_line(t_map *map, char *line, int i)
+static int	check_valid_chars(char *line)
 {
-	size_t	line_len;
-	int		j;
+	int	j;
 
-	line_len = ft_strlen(line);
-	if (line[line_len - 1] == '\n')
-		line_len--;
-	if (i == 0)
-		map->width = line_len;
-	if (line_len != (size_t)map->width)
-	{
-		ft_putendl_fd("Error\nNot a rectangle", 2);
-		return (0);
-	}
 	j = -1;
 	while (line[++j] && line[j] != '\n')
 	{
@@ -37,10 +26,34 @@ int	process_map_line(t_map *map, char *line, int i)
 			return (0);
 		}
 	}
-	map->map[i] = ft_strdup(line);
-	if (!map->map[i])
-		return (0);
 	return (1);
+}
+
+int	process_map_line(t_map *map, char *line, int i)
+{
+	size_t	line_len;
+
+	if (!line)
+		return (0);
+	line_len = ft_strlen(line);
+	if (line[0] == '\n')
+	{
+		ft_putendl_fd("Error\nEmpty line in map not allowed", 2);
+		return (0);
+	}
+	if (line[line_len - 1] == '\n')
+		line_len--;
+	if (i == 0)
+		map->width = line_len;
+	if (line_len != (size_t)map->width)
+	{
+		ft_putendl_fd("Error\nNot a rectangle", 2);
+		return (0);
+	}
+	if (!check_valid_chars(line))
+		return (0);
+	map->map[i] = ft_strdup(line);
+	return (map->map[i] != NULL);
 }
 
 int	check_walls(t_map *pos)

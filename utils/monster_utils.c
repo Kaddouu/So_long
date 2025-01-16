@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:22:06 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/15 17:19:43 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:18:27 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,30 @@ int	load_monster_frames(t_map *game, t_monster *monster)
 		i++;
 	}
 	return (1);
+}
+
+void	free_monster_textures(t_map *game)
+{
+	int	i;
+	int	j;
+
+	if (!game || !game->monsters.monsters || !game->mlx_connection)
+		return ;
+	i = -1;
+	while (++i < game->monsters.count)
+	{
+		j = -1;
+		while (++j < MAX_FRAMES)
+		{
+			if (game->monsters.monsters[i].anim.frames[j])
+			{
+				mlx_destroy_image(game->mlx_connection,
+					game->monsters.monsters[i].anim.frames[j]);
+				game->monsters.monsters[i].anim.frames[j] = NULL;
+			}
+		}
+	}
+	free(game->monsters.monsters);
+	game->monsters.monsters = NULL;
+	game->monsters.count = 0;
 }

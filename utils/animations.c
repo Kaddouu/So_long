@@ -6,26 +6,11 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 17:39:59 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/15 17:20:08 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:16:12 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/solong.h"
-
-static void	init_frame(t_frame *frame)
-{
-	int	i;
-
-	i = 0;
-	frame->current_frame = 0;
-	frame->frame_delay = 120;
-	frame->delay_counter = 0;
-	while (i < MAX_FRAMES)
-	{
-		frame->frames[i] = NULL;
-		i++;
-	}
-}
 
 static char	*create_frame_path(char *base_path, int frame_num)
 {
@@ -54,12 +39,10 @@ static int	load_frame_images(t_map *game, t_frame *frame, char *base_path)
 	int		width;
 	int		height;
 
-	i = 0;
-	while (i < MAX_FRAMES)
+	i = -1;
+	while (++i < MAX_FRAMES)
 	{
 		frame_path = create_frame_path(base_path, i + 1);
-		if (!frame_path)
-			return (0);
 		if (!validate_texture_file(frame_path))
 		{
 			ft_putstr_fd("Error\nMissing frame: ", 2);
@@ -73,7 +56,6 @@ static int	load_frame_images(t_map *game, t_frame *frame, char *base_path)
 		free(frame_path);
 		if (!frame->frames[i])
 			return (0);
-		i++;
 	}
 	return (1);
 }

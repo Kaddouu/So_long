@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:19:42 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/15 20:19:14 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:31:01 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,19 @@ int	update_game(t_map *game)
 int	render_game(t_map *game)
 {
 	if (!game)
+	{
 		return (1);
+	}
 	game->mlx_connection = mlx_init();
 	if (!game->mlx_connection)
-		return (1);
-	game->mlx_window = mlx_new_window(game->mlx_connection,
-			game->width * TILE_SIZE, game->height * TILE_SIZE, "so_long");
-	if (!game->mlx_window)
 	{
-		free_mlx(game);
+		clean_all_resources(game);
 		return (1);
 	}
-	if (!init_animations(game))
-	{
-		free_mlx(game);
-		return (1);
-	}
-	if (!init_monsters(game))
-	{
-		free_textures(game);
-		free_mlx(game);
-		return (1);
-	}
-	if (!load_textures(game))
+	game->mlx_window = mlx_new_window(game->mlx_connection, game->width
+			* TILE_SIZE, game->height * TILE_SIZE, "so_long");
+	if (!game->mlx_window || !init_animations(game) || !init_monsters(game)
+		|| !load_all_textures(game))
 	{
 		clean_all_resources(game);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:14:14 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/15 20:04:58 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/16 20:04:39 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,26 @@ static void	init_map_values(t_map *map)
 	map->monsters.count = 0;
 }
 
-t_map	*load_map(char *filename)
+static t_map	*init_new_map(char *filename)
 {
 	t_map	*map;
 
-	map = NULL;
 	if (!ft_strnstr(filename, ".ber", ft_strlen(filename)))
 	{
-		ft_putendl_fd("Error\nNot a .ber map", 2);
+		ft_putendl_fd("Error\nNot a .ber file", 2);
 		return (NULL);
 	}
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
 	init_map_values(map);
-	if (!count_map_height(map, filename))
+	printf("je suis la\n");
+	return (map);
+}
+
+static t_map	*validate_map_size(t_map *map, char *filename)
+{
+	if (!count_map_height(map, filename, 0))
 	{
 		free_and_close(map, -1);
 		return (NULL);
@@ -55,28 +60,27 @@ t_map	*load_map(char *filename)
 	if (map->height == 0)
 	{
 		ft_putendl_fd("Error\nEmpty file", 2);
-		return (free(map), NULL);
+		free(map);
+		return (NULL);
 	}
 	if (!allocate_map_array(map))
 		return (NULL);
-	return (load_map_content(map, filename));
+	return (map);
 }
 
-t_map	*load_map_content(t_map *map, char *filename)
+static t_map	*process_map_content(t_map *map, int fd)
 {
-	int		fd;
 	char	*line;
 	int		i;
 
 	i = 0;
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (free(map->map), free(map), NULL);
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		if (not_process_line(map, line, i, fd))
 			return (NULL);
 		i++;
+		line = get_next_line(fd);
 	}
 	close(fd);
 	if (i < map->height)
@@ -86,9 +90,27 @@ t_map	*load_map_content(t_map *map, char *filename)
 		return (NULL);
 	}
 	map->map[i] = NULL;
-	if (!check_map_validity(map))
+	return (map);
+}
+
+t_map	*load_map(char *filename)
+{
+	t_map	*map;
+	int		fd;
+
+	map = init_new_map(filename);
+	if (!map)
+		return (NULL);
+	if (!validate_map_size(map, filename))
+		return (NULL);
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (free(map->map), free(map), NULL);
+	map = process_map_content(map, fd);
+	if (!map || !check_map_validity(map))
 	{
-		clean_and_exit(map, NULL, -1, i);
+		if (map)
+			clean_and_exit(map, NULL, -1, map->height);
 		return (NULL);
 	}
 	return (map);
