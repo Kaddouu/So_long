@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:33:16 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/17 20:21:22 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/17 20:41:22 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,9 @@ int					load_collectible_texture(t_map *game);
 int					load_floor_texture(t_map *game);
 int					load_exit_texture(t_map *game);
 void				load_player_direction_texture(t_map *game, char *path);
+void				render_tile(t_map *game, int x, int y);
+void				render_player(t_map *game, int x, int y);
+
 
 /* ************************************************************************** */
 /*                                                                            */
@@ -160,9 +163,11 @@ void				move_up(t_map *game);
 void				move_down(t_map *game);
 void				move_left(t_map *game);
 void				move_right(t_map *game);
-void				handle_move(t_map *game, int new_x, int new_y);
 void				find_player_pos(t_map *game, int *x, int *y);
 int					can_move(t_map *game, int new_x, int new_y);
+void				check_collision_and_collect(t_map *game, int new_x,
+						int new_y);
+void				handle_move(t_map *game, int new_x, int new_y);
 
 /* ************************************************************************** */
 /*                                                                            */
@@ -200,10 +205,5 @@ void				clean_remaining_lines(int fd);
 void				clean_and_exit(t_map *map, char *line, int fd, int i);
 int					clean_animations(t_map *game, int level);
 void				free_and_close(t_map *map, int fd);
-
-void				check_collision_and_collect(t_map *game, int new_x,
-						int new_y);
-void				render_tile(t_map *game, int x, int y);
-void				render_player(t_map *game, int x, int y);
 
 #endif
