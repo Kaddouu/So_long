@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:33:16 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/17 20:41:22 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/17 20:51:46 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ int					load_exit_texture(t_map *game);
 void				load_player_direction_texture(t_map *game, char *path);
 void				render_tile(t_map *game, int x, int y);
 void				render_player(t_map *game, int x, int y);
-
 
 /* ************************************************************************** */
 /*                                                                            */
