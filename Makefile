@@ -6,18 +6,19 @@
 #    By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/30 20:02:48 by ilkaddou          #+#    #+#              #
-#    Updated: 2025/01/16 20:29:00 by ilkaddou         ###   ########.fr        #
+#    Updated: 2025/01/17 20:18:58 by ilkaddou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iincludes -Ilibft -g3
-LDFLAGS = -Llibft -lft
+CFLAGS = -Wall -Wextra -Werror -Iincludes -Ilibft -Ift_printf -g3
+LDFLAGS = -Llibft -lft -Lft_printf -lftprintf
 SRC_DIR = src
 UTILS_DIR = utils
 GNL_DIR = GNL
 LIBFT_DIR = libft
+PRINTF_DIR = ft_printf
 OBJ_DIR = obj
 NAME = so_long
 
@@ -31,11 +32,13 @@ else
     MLX_FLAGS = -Lmlx -lm -lbsd -lX11 -lXext
 endif
 MLX_LIB = $(MLX_DIR)/libmlx.a
+PRINTF_LIB = $(PRINTF_DIR)/libftprintf.a
 
 SRC_FILES = $(SRC_DIR)/check_map.c \
             $(SRC_DIR)/init_map.c \
             $(SRC_DIR)/main.c \
             $(SRC_DIR)/render_game.c
+
 UTILS_FILES = $(UTILS_DIR)/animations.c \
               $(UTILS_DIR)/floodfill.c \
               $(UTILS_DIR)/handle_move.c \
@@ -48,8 +51,8 @@ UTILS_FILES = $(UTILS_DIR)/animations.c \
               $(UTILS_DIR)/player_directions.c \
               $(UTILS_DIR)/texture_decor.c \
               $(UTILS_DIR)/textures_utils.c \
-			  $(UTILS_DIR)/animations_utils.c \
-			  $(UTILS_DIR)/free_utils.c \
+              $(UTILS_DIR)/animations_utils.c \
+              $(UTILS_DIR)/free_utils.c
 
 GNL_FILES = $(GNL_DIR)/get_next_line.c
 
@@ -57,7 +60,7 @@ OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o) \
             $(UTILS_FILES:$(UTILS_DIR)/%.c=$(OBJ_DIR)/%.o) \
             $(GNL_FILES:$(GNL_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-all: $(MLX_LIB) $(NAME)
+all: $(OBJ_DIR) $(MLX_LIB) $(PRINTF_LIB) $(NAME)
 
 $(MLX_LIB):
 	@if [ ! -d "$(MLX_DIR)" ]; then \
@@ -66,11 +69,13 @@ $(MLX_LIB):
 		make -C $(MLX_DIR); \
 	fi
 
+$(PRINTF_LIB):
+	@make -C $(PRINTF_DIR)
+
 $(NAME): $(OBJ_FILES)
 	@make -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(MLX_LIB) $(MLX_FLAGS) $(LDFLAGS)
+	$(CC) $(OBJ_FILES) $(MLX_LIB) -o $(NAME) $(MLX_FLAGS) -L$(PRINTF_DIR) -lftprintf -L$(LIBFT_DIR) -lft
 
-# Compilation des fichiers objets à partir des sources
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -80,13 +85,13 @@ $(OBJ_DIR)/%.o: $(UTILS_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR)/%.o: $(GNL_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Création du répertoire obj si nécessaire
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 clean:
 	@rm -rf $(OBJ_DIR)
 	@make clean -C $(LIBFT_DIR)
+	@make clean -C $(PRINTF_DIR)
 	@if [ -d "$(MLX_DIR)" ]; then \
 		make clean -C $(MLX_DIR); \
 	fi
@@ -94,11 +99,9 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@make fclean -C $(LIBFT_DIR)
+	@make fclean -C $(PRINTF_DIR)
 	@rm -rf $(MLX_DIR)
 
 re: fclean all
 
-libft:
-	@make -C $(LIBFT_DIR)
-
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re

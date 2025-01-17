@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 19:14:14 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/16 20:04:39 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/17 20:05:37 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static t_map	*init_new_map(char *filename)
 	if (!map)
 		return (NULL);
 	init_map_values(map);
-	printf("je suis la\n");
 	return (map);
 }
 
