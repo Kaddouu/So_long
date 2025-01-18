@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 16:33:16 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/18 01:32:09 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/18 02:52:29 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ int					flood_fill_check(t_map *map);
 
 int					validate_texture_file(char *path);
 void				*check_load_texture(t_map *game, char *path);
-void				init_null_textures(t_map *game);
 int					load_all_textures(t_map *game);
 int					load_wall_texture(t_map *game);
 int					load_collectible_texture(t_map *game);
