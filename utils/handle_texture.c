@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 17:45:34 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/17 19:52:20 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/18 02:30:24 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,35 @@ void	draw_tile(t_map *game, void *texture, int x, int y)
 {
 	mlx_put_image_to_window(game->mlx_connection, game->mlx_window, texture, x
 		* TILE_SIZE, y * TILE_SIZE);
+}
+
+static void	put_count_moves(t_map *game)
+{
+	char	*string;
+	char	*count;
+	int		x;
+	int		y;
+
+	x = 0;
+	count = ft_itoa(game->moves);
+	if (!count)
+		return ;
+	string = ft_strjoin(count, " moves done.");
+	if (!string)
+		return ;
+	while (x <= 110)
+	{
+		y = 0;
+		while (y <= 25)
+		{
+			mlx_pixel_put(game->mlx_connection, game->mlx_window, x, y, 0);
+			y++;
+		}
+		x++;
+	}
+	mlx_string_put(game->mlx_connection, game->mlx_window, 10, 15, 99999999,
+		string);
+	return (free(count), free(string));
 }
 
 void	render_map(t_map *game)
@@ -33,6 +62,7 @@ void	render_map(t_map *game)
 		}
 	}
 	render_monsters(game);
+	put_count_moves(game);
 }
 
 void	render_tile(t_map *game, int x, int y)
