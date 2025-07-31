@@ -92,6 +92,7 @@ typedef struct s_map
 	t_player_anims	player_anims;
 	t_textures		textures;
 	t_monster_list	monsters;
+	void		*counter_bg;
 }					t_map;
 
 /* ****************************************************************** */
@@ -203,5 +204,6 @@ void				clean_remaining_lines(int fd);
 void				clean_and_exit(t_map *map, char *line, int fd, int i);
 int					clean_animations(t_map *game, int level);
 void				free_and_close(t_map *map, int fd);
+void	init_counter_bg(t_map *game);
 
 #endif

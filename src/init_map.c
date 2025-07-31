@@ -106,6 +106,9 @@ t_map	*load_map(char *filename)
 	if (fd < 0)
 		return (free(map->map), free(map), NULL);
 	map = process_map_content(map, fd);
+	// Initialisation de l'image de fond du compteur après la création de la fenêtre (à déplacer si besoin)
+	if (map && map->mlx_connection && map->mlx_window)
+		init_counter_bg(map);
 	if (!map || !check_map_validity(map))
 	{
 		if (map)

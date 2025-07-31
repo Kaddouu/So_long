@@ -12,45 +12,56 @@
 
 #include "../includes/solong.h"
 
-void	draw_tile(t_map *game, void *texture, int x, int y)
+void draw_tile(t_map *game, void *texture, int x, int y)
 {
-	mlx_put_image_to_window(game->mlx_connection, game->mlx_window, texture, x
-		* TILE_SIZE, y * TILE_SIZE);
+	mlx_put_image_to_window(game->mlx_connection, game->mlx_window, texture, x * TILE_SIZE, y * TILE_SIZE);
 }
 
-static void	put_count_moves(t_map *game)
+void init_counter_bg(t_map *game)
 {
-	char	*string;
-	char	*count;
-	int		x;
-	int		y;
+	int x;
+	int y;
+	int width;
+	int height;
+	int *data;
 
-	x = 0;
+	width = 120;
+	height = 30;
+	game->counter_bg = mlx_new_image(game->mlx_connection, width, height);
+	if (!game->counter_bg)
+		return;
+	data = (int *)mlx_get_data_addr(game->counter_bg, &(int){0}, &(int){0}, &(int){0});
+	if (!data)
+		return;
+	for (y = 0; y < height; y++)
+	{
+		for (x = 0; x < width; x++)
+		{
+			data[y * width + x] = 0x000000;
+		}
+	}
+}
+
+static void put_count_moves(t_map *game)
+{
+	char *string;
+	char *count;
+
 	count = ft_itoa(game->moves);
 	if (!count)
-		return ;
+		return;
 	string = ft_strjoin(count, " moves done.");
 	if (!string)
-		return ;
-	while (x <= 110)
-	{
-		y = 0;
-		while (y <= 25)
-		{
-			mlx_pixel_put(game->mlx_connection, game->mlx_window, x, y, 0);
-			y++;
-		}
-		x++;
-	}
-	mlx_string_put(game->mlx_connection, game->mlx_window, 10, 15, 99999999,
-		string);
+		return;
+	mlx_put_image_to_window(game->mlx_connection, game->mlx_window, game->counter_bg, 0, 0);
+	mlx_string_put(game->mlx_connection, game->mlx_window, 10, 15, 0xFFFFFF, string);
 	return (free(count), free(string));
 }
 
-void	render_map(t_map *game)
+void render_map(t_map *game)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 
 	y = -1;
 	while (++y < game->height)
@@ -65,7 +76,7 @@ void	render_map(t_map *game)
 	put_count_moves(game);
 }
 
-void	render_tile(t_map *game, int x, int y)
+void render_tile(t_map *game, int x, int y)
 {
 	if (game->map[y][x] == '0')
 		draw_tile(game, game->textures.floor, x, y);
@@ -79,12 +90,11 @@ void	render_tile(t_map *game, int x, int y)
 		draw_tile(game, game->textures.exit, x, y);
 }
 
-void	render_player(t_map *game, int x, int y)
+void render_player(t_map *game, int x, int y)
 {
-	t_frame	*current_anim;
+	t_frame *current_anim;
 
-	if (x == game->exit_x && y == game->exit_y
-		&& game->collected != game->collectibles)
+	if (x == game->exit_x && y == game->exit_y && game->collected != game->collectibles)
 	{
 		update_animation(&game->player_anims.idle_down_exit);
 		current_anim = &game->player_anims.idle_down_exit;

@@ -85,4 +85,9 @@ void	free_textures(t_map *game)
 	free_animation_frames(&game->player_anims.idle_left, game);
 	free_animation_frames(&game->player_anims.idle_right, game);
 	free_animation_frames(&game->player_anims.idle_down_exit, game);
+	if (game->counter_bg)
+	{
+		mlx_destroy_image(game->mlx_connection, game->counter_bg);
+		game->counter_bg = NULL;
+	}
 }

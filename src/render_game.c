@@ -6,7 +6,7 @@
 /*   By: ilkaddou <ilkaddou@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 20:19:42 by ilkaddou          #+#    #+#             */
-/*   Updated: 2025/01/18 02:29:56 by ilkaddou         ###   ########.fr       */
+/*   Updated: 2025/01/28 16:45:10 by ilkaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	render_game(t_map *game)
 		clean_all_resources(game);
 		return (1);
 	}
+	init_counter_bg(game);
 	render_map(game);
 	mlx_hook(game->mlx_window, 17, 0, close_window, game);
 	mlx_hook(game->mlx_window, 2, 1L << 0, key_press, game);
