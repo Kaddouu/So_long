@@ -45,8 +45,4 @@ Lancez le jeu avec :
 
 Remplacez `maps/map.ber` par le chemin de votre carte.
 
-## Auteurs
-- [Votre nom ou pseudo]
-
-## Remerciements
-Merci à l'équipe pédagogique de 42 et à la communauté pour leur aide et leurs ressources.
+Have fun !
